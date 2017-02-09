@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
         <title>Laravel</title>
 
@@ -65,6 +66,28 @@
         </style>
     </head>
     <body>
+        <div ng-app="app">
+          <div ng-controller="mainController"></div>
+        </div>
+        <script type="text/javascript">
+        var app = angular.module('app', []);
+
+        app.controller('mainController', ['$scope','$http', function($scope,$http) {
+                var req = {
+                 method: 'GET',
+                 url: 'http://knowledge.dev/api/v1/user',
+                 headers: {
+                   'Content-Type': 'application/json'
+                 },
+                 data: { test: 'test' }
+                }
+
+                $http(req).then(function(response){ console.log(response.data)}, function(response){});
+         }]);
+
+       
+        
+        </script>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
