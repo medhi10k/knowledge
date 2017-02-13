@@ -13,11 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 Route::group(['prefix' => 'v1'], function () {
-    Route::middleware('auth:api')->get('/user', function () {
-        return ['test' => 'hdjd'];
-    });
+    Route::post('/authenticate', 'Auth\ApiLoginController@authenticate');
+    Route::post('/register', 'Auth\ApiLoginController@register');
 
-    Route::get('/test', function () {
-        return ['test' => 'hdjd'];
-    });
+    Route::middleware('jwt.auth')->get('/knowledge', 'Api\KnowledgeController@generate');
 });
